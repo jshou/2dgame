@@ -22,6 +22,6 @@ public class DudeController : MonoBehaviour {
   }
 
   private bool WellGrounded() {
-    return DudeTransform.localPosition.y < GROUND_HEIGHT;
+    return Dude.velocity.y == 0;
   }
 }
