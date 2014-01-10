@@ -5,12 +5,12 @@ public class DudeController : MonoBehaviour {
   public Rigidbody2D Dude;
   public Transform DudeTransform;
   public float JumpForce = 500f;
+  public CanJumpDecider CanJumpDecider;
 
-  private const float GROUND_HEIGHT = -2.65f;
   private const float WALK_SPEED = 10f;
 
   void Update () {
-    if (WellGrounded()) {
+    if (CanJumpDecider.CanJump()) {
       if(Input.GetButtonDown("Jump")) {
         Dude.AddForce(new Vector2(0f, JumpForce));
       } else if (Input.GetButton("Horizontal")) {
@@ -19,9 +19,5 @@ public class DudeController : MonoBehaviour {
         Dude.velocity = Vector2.zero;
       }
     }
-  }
-
-  private bool WellGrounded() {
-    return Dude.velocity.y == 0;
   }
 }
