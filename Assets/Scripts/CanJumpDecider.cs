@@ -8,10 +8,6 @@ public class CanJumpDecider : MonoBehaviour {
   private int Collisions = 0;
   private const string GROUND_TAG = "ground";
 
-  void Update() {
-    Debug.Log(Collisions);
-  }
-
   public bool CanJump() {
     return Collisions > 0;
   }
