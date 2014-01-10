@@ -7,10 +7,21 @@ public class DudeController : MonoBehaviour {
   public float JumpForce = 500f;
 
   private const float GROUND_HEIGHT = -2.65f;
+  private const float WALK_SPEED = 0.1f;
 
   void Update () {
-    if(Input.GetButtonDown("Jump") && DudeTransform.localPosition.y < GROUND_HEIGHT) {
-      Dude.AddForce(new Vector2(0f, JumpForce));
+    if (WellGrounded()) {
+      if(Input.GetButtonDown("Jump")) {
+        Dude.AddForce(new Vector2(0f, JumpForce));
+      } else if (Input.GetButton("Horizontal")) {
+        Dude.AddForce(new Vector2(Input.GetAxis("Horizontal") * 10, 0f));
+      } else if (Input.GetButtonUp("Horizontal")) {
+        Dude.velocity = Vector2.zero;
+      }
     }
+  }
+
+  private bool WellGrounded() {
+    return DudeTransform.localPosition.y < GROUND_HEIGHT;
   }
 }
